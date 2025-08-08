@@ -1,3 +1,11 @@
+#author Arkaaap Dat 8'th of august 2025 
+#Pow : Role Based Access Management System (POC) 
+#For linux folks :) 
+#!/usr/bin/env python3 
+
+
+
+
 import random
 import hashlib
 import socket 
@@ -49,16 +57,18 @@ def shell(username, role):
     while True:
         cmd = input(f"{username}@SecureIAM> ").strip().lower()
         if cmd == "man":
-            print("Available commands: man, role, access, whoami, exit")
+            print("Available commands: man, role, access, whoami, exit,ip addr,ipconfig,ifconfig")
         elif cmd == "role":
             print(f"Your role is: {role}")
         elif cmd == "access":
             check_access(role)
         elif cmd == "whoami":
+            print(f"user")
+        elif "ip addr" or "ipconfig" or"ifconfig":
             print (f"ip addr: {socket.gethostbyname(socket.gethostname())}")
         elif cmd == "exit":
             print("Logging out...")
-            break
+            SystemExit
         # elif cmd == "shell":
         #     os.system(bin//sh)
         #     break
@@ -75,4 +85,6 @@ if __name__ == "__main__":
     }
 
     username, role = login(users)
-    shell(username, role)
+    if username in users:
+        shell(username, role)
+
